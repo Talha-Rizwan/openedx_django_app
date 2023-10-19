@@ -158,7 +158,7 @@ setup(
     ],
     entry_points={
         "lms.djangoapp": [
-            "my_app = list_and_filter.apps:ListAndFilterConfig",
+            "list_and_filter = list_and_filter.apps:ListAndFilterConfig",
         ],
         "cms.djangoapp": [
         ],
