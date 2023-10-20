@@ -60,5 +60,4 @@ TEMPLATES = [{
     },
 }]
 
-ALLOWED_HOSTS = ['*']
 DEBUG = True
