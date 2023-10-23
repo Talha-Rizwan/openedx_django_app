@@ -1,15 +1,15 @@
 from django.shortcuts import render
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from .models import Courses
+
+from rest_framework import filters
 from rest_framework.generics import ListAPIView
-from .serializers import CoursesSerializer
+from openedx.core.djangoapps.content.course_overviews.models import CourseOverview
+from lms.djangoapps.course_api.serializers import CourseSerializer
 
 def hello_template(request):
     return render(request, 'list_and_filter/hello.html')
 
-@api_view(['GET'])
-def get_courses(request):
-    courses = Courses.objects.all()
-    serializer = CoursesSerializer(courses, many=True)
-    return Response({'courses': serializer.data})
+class CourseListAPIView(ListAPIView):
+    queryset = CourseOverview.objects.all()
+    serializer_class = CourseSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['display_name', 'language']
